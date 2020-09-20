@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.chat {
+    width: 400px;
+    height: 500px;
+    position: relative;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    transform: translate(-50,-50);
+    font-family: sans-serif;
+}
+.chat-header {
+    text-align: center;
+    background-color: #075d52;
+    font-size: 24px;
+    color: whitesmoke;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    padding: 12px;
+}
+
+.chat-window {
+    background-image: url('/assests/crop.jpg');
+    height: 390px;
+    width: 100%;
+    overflow-y: scroll;
+    padding-bottom: 10px;
+}
+
+.messageForm {
+    background-color: #075d52;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    padding: 12px;
+}
+#msg-input{
+    padding: 10px;
+    border: 0;
+    width: 80%;
+    outline: none;
+    border-radius: 8px;
+
+}
+
+#msg-button{
+    cursor: pointer;
+    border-radius: 100%;
+    margin-left: 15px;
+
+}
+.msg {
+    list-style-type: none;
+}
+.msg-box {
+    background-color: white;
+    display: inline-block;
+    padding: 10px;
+    font-size: 15px;
+    text-align: left;
+    margin: 5px 5px 5px 0px;
+    border-radius: 10px;
+    box-shadow: .2px 0.3px 2px rgba(0,0,0,0.3);
+}
+
+.msg-box > i {
+    font-weight: bold;
+}
+
+.act{
+    text-align: right;
+}
+.act > .msg-box {
+    background-color: rgba(233, 233, 233, 0.918);
+    color: black;
+}
+.act i {
+    display: none;
+}
+.act > img {
+    display: none;
+}
+
+/* Scroller Styling */
+#chat-window::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  #chat-window::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  #chat-window::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  #chat-window::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+.UserForm {
+    background-color: white;
+    width: 200px !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 25px;
+    transform: translate(-50%, -50%);
+}  
+.btn {
+    width: 100% !important;
+    padding: 7px !important;
+    border: none !important;
+    cursor: pointer;
+    align-items: center;    
+}
+h5 {
+    text-align: center !important; 
+    line-height: 100%;
+    padding-bottom: 10px;
+    margin: 10px !important;
+    font-weight: lighter;
+}
+.userImg {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    padding-top: 2px;
+}

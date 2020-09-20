@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp</title>
+    <!--CSS link-->
+    <link rel="stylesheet" href="assests/main.css">
+    <!--Favi-icon-->
+    <link rel="icon" href="assests/whatsapp.png" sizes="16x16" type="image/png">
+    <!--Bootstrap and Font Icon-->
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!--Firebase Scripts-->
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBSz-2Hj-6oNwWUz_eqqk-IPH6xv516oTQ",
+            authDomain: "chatty-app-d3d.firebaseapp.com",
+            databaseURL: "https://chatty-app-d3d.firebaseio.com",
+            projectId: "chatty-app-d3d",
+            storageBucket: "chatty-app-d3d.appspot.com",
+            messagingSenderId: "149926446942",
+            appId: "1:149926446942:web:b6915cd15d4bfc16aa71cf"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+
+<body>
+
+    <div class="chat">
+        <!-- Modal For Facebook Login-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="mx-auto mt-4 mb-1 pb-1" id="exampleModalabel">Please Log In</h5>
+                        <button type="button" id="modal-close" class="close mx-0" data-dismiss="modal" disabled>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        To start chat please log in to your facebook
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 mb-4 mx-auto">
+                        <button id="facebook" class="btn btn-md btn-primary mx-auto">Facebook</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal For Facebook Login End-->
+
+        <!-- Simple Form -->
+
+        <!-- <form id="UserForm" class="UserForm">
+            <div class="row">
+                <div class="main">
+                    <h5>Please Log In</h5>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <button id="facebook" class="btn btn-md btn-primary btn-block">Facebook</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form> -->
+
+        <!-- Chat Application Header-->
+        <div class="chat-header">
+            <img src="https://img.icons8.com/color/30/whatsapp.png" alt="WhatsApp-Img">
+            WhatsApp
+        </div>
+        <!-- Chat Application Header End-->
+
+        <!-- Chat Application Window -->
+
+        <div class="chat-window" id="chat-window">
+
+            <!--Chat Application Main-Screen -->
+            <ul id="messages">
+
+            </ul>
+            <!--Chat Application Main-Screen -->
+
+            <!-- Input Form for Messaging -->
+            <form id="messageForm" class="messageForm">
+                <input type="text" id="msg-input" placeholder="Enter a Message" disabled>
+                <button id="msg-button" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 171 171"
+                        style=" fill:#000000;">
+                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                            stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                            font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            style="mix-blend-mode: normal">
+                            <path d="M0,171.99654v-171.99654h171.99654v171.99654z" fill="none"></path>
+                            <g>
+                                <path
+                                    d="M168.36152,85.5c0,-45.75586 -37.10566,-82.86152 -82.86152,-82.86152c-45.75586,0 -82.86152,37.10566 -82.86152,82.86152c0,45.75586 37.10566,82.86152 82.86152,82.86152c45.75586,0 82.86152,-37.10566 82.86152,-82.86152z"
+                                    fill="#ffffff"></path>
+                                <path
+                                    d="M136.53281,81.99316l-47.15859,-28.95645c-1.30254,-0.80156 -2.97246,-0.83496 -4.3084,-0.1002c-1.33594,0.73477 -2.1709,2.1709 -2.1709,3.70723v57.6791c0,1.53633 0.83496,2.93906 2.1709,3.70723c0.63457,0.36738 1.36934,0.53438 2.0707,0.53438c0.76816,0 1.53633,-0.20039 2.2043,-0.63457l47.15859,-28.72266c1.26914,-0.76816 2.0373,-2.1375 2.0373,-3.60703c0.0334,-1.46953 -0.73477,-2.83887 -2.00391,-3.60703z"
+                                    fill="#075d52"></path>
+                                <path
+                                    d="M114.72363,76.64941h-78.25254c-2.2377,0 -4.00781,1.80352 -4.00781,4.00781v9.65215c0,2.2377 1.80352,4.00781 4.00781,4.00781h78.25254c2.2377,0 4.00781,-1.80352 4.00781,-4.00781v-9.65215c0.0334,-2.2043 -1.77012,-4.00781 -4.00781,-4.00781z"
+                                    fill="#075d52"></path>
+                            </g>
+                        </g>
+                    </svg>
+                </button>
+
+            </form>
+        </div>
+        <!-- Chat Window -->
+
+    </div>
+
+    <!--uuid for userId-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js"></script>
+    <!--Default Js file-->
+    <script src="assests/app.js"></script>
+    <!--Bootstrap Js files-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js
+    "></script>
+
+    <!--Modal Function-->
+    <script>
+        $(document).ready(function () {
+            $("#exampleModal").modal('show');
+        });
+    </script>
+</body>
+
+</html>
